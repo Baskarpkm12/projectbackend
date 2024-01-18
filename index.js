@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+require('dotenv').config();
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -20,4 +21,4 @@ app.use("/vendor",vendorroute);
 // app.use("/sale",saleroute);
 // app.use("/payment",paymentroute);
 
-app.listen(5000,()=> console.log("server started in PORT 5000"));
+app.listen(process.env.PORT,()=> console.log("server started in PORT 5000"));
