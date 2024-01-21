@@ -1,5 +1,7 @@
 const productcontroll =require('../controlls/productsc');
 const router = require('express').Router();
+const multer = require('multer');
+const DIR = "./uploads/";
 
 router.get('/read',productcontroll.readproducts);
 router.get('/readspesific/:id',productcontroll.readspesific);

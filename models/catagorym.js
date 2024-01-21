@@ -6,20 +6,16 @@ const db = require('../db');
 db.dbconnection();
 
 const catagoryschema = new schema({
-    ctg_id : {
-        type : [Number,"please enter number only!"],
-        required : [true,"id is important!"]
-    },
     ctg_name: {
-        type : [String,"please enter string only!"],
+        type : String,
         required : [true,"please enter name!"]
     },
     ctg_location : {
-        type : [String,"please enter string only!"],
+        type : String,
         required : [true,"please enetr location!"]
     },
     products : {
-        type : [Number,"please enter number only!"],
+        type : Number,
         required : [true,"eneter total products!"]
     }
 

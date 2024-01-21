@@ -13,18 +13,31 @@ async function readcatagory(req, res) {
         res.json({ "error": err.message });
     }
 }
+async function readspesific(req, res) {
+    try {
+        const obj = req.params.id;
+        const results = await catagorymodel.find({_id:obj}).sort({"_id": -1});
+        if(results.length > 0)
+            res.json({"data": results, "msg": "success"});
+        else
+            res.json({"data": [], "msg": "catagory not found"});
+    
+    } catch (err) {
+        res.json({ "error": err.message });
+    }
+}
 
 async function addcatagory(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
             const resultsArr = await catagorymodel.find({"ctg_name": obj.ctg_name});
-            const opts = { runValidators: true };
+            // const opts = { runValidators: true };
     
             if(resultsArr.length > 0)
                 res.json({"msg":"catagory already Exists!"});
             else {
-                const insertcatagory = new catagorymodel(obj,opts);
+                const insertcatagory = new catagorymodel(obj);
                 await insertcatagory.save();
                 res.json({"msg":"catagory added successfully!"});
             }
@@ -83,4 +96,4 @@ async function updatecatagory(req, res) {
     }
 }
 
-module.exports ={readcatagory,addcatagory,updatecatagory,deletecatagory};
+module.exports ={readcatagory,readspesific,addcatagory,updatecatagory,deletecatagory};

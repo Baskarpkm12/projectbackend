@@ -13,17 +13,29 @@ async function readvendor(req, res) {
         res.json({ "error": err.message });
     }
 }
+async function readspesific(req, res) {
+    try {
+        const obj = req.params.id;
+        const results = await vendormodel.find({_id:obj}).sort({"_id": -1});
+        if(results.length > 0)
+            res.json({"data": results, "msg": "success"});
+        else
+            res.json({"data": [], "msg": "vendor not found"});
+    
+    } catch (err) {
+        res.json({ "error": err.message });
+    }
+}
 
 async function addvendor(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
             const resultsArr = await vendormodel.find({"vendor_name": obj.vendor_name});
-            const opts = { runValidators: true };
             if(resultsArr.length > 0)
                 res.json({"msg":"vendor already Exists!"});
             else {
-                const insertvendor = new vendormodel(obj,opts);
+                const insertvendor = new vendormodel(obj);
                 await insertvendor.save();
                 res.json({"msg":"vendor added successfully!"});
             }
@@ -82,4 +94,4 @@ async function updatevendor(req, res) {
     }
 }
 
-module.exports ={readvendor,addvendor,updatevendor,deletevendor};
+module.exports ={readvendor,readspesific,addvendor,updatevendor,deletevendor};

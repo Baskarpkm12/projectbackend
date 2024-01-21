@@ -6,10 +6,6 @@ const db = require('../db');
 db.dbconnection();
 
 const vendorschema = new schema({
-    vendor_id : {
-        type : [Number,"please enter number only!"],
-        required : [true,"id is important!"]
-    },
     vendor_name: {
         type : [String,"please enter string only!"],
         required : [true,"please enter name!"]

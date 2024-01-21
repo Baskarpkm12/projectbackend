@@ -10,13 +10,13 @@ app.use(cors({
 }));
 
 const productsroute = require('./routes/productsr');
-const catageryroute = require('./routes/catageryr');
+const catagoryroute = require('./routes/catagoryr');
 const vendorroute = require('./routes/vendorr');
 const saleroute = require('./routes/saler');
 const paymentroute = require('./routes/paymentr');
 
 app.use("/product",productsroute);
-app.use("/catagery",catageryroute);
+app.use("/catagory",catagoryroute);
 app.use("/vendor",vendorroute);
 // app.use("/sale",saleroute);
 // app.use("/payment",paymentroute);
