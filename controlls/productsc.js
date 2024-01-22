@@ -78,12 +78,12 @@ async function updateproduct(req, res) {
         console.log(obj);
         console.log(obj.id);
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await productsmodel.find({"_id": obj.id});
+            const resultsArr = await productsmodel.find({"_id": obj._id});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
 
-                const results = await productsmodel.updateOne({"_id": obj.id}, {$set: obj}, opts);
+                const results = await productsmodel.updateOne({"_id": obj._id}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"product has been updated successfully!"});
