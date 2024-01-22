@@ -75,12 +75,12 @@ async function updatecatagory(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"_id": obj.id});
+            const resultsArr = await catagorymodel.find({"_id": obj._id});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
 
-                const results = await catagorymodel.updateOne({"_id": obj.id}, {$set: obj}, opts);
+                const results = await catagorymodel.updateOne({"_id": obj._id}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"catagory has been updated successfully!"});
