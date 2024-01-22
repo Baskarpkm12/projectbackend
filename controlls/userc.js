@@ -1,13 +1,14 @@
-const catagorymodel =require('../models/catagorym');
+const usersmodel =require('../models/userm');
 
-async function readcatagory(req, res) {
+async function readusers(req, res) {
     try {
         const obj = req.body;
-        const results = await catagorymodel.find(obj);
+        console.log(obj);
+        const results = await usersmodel.find(obj).sort({'_id': -1});
         if(results.length > 0)
             res.json({"data": results, "msg": "success"});
         else
-            res.json({"data": [], "msg": "catagory not found"});
+            res.json({"data": [], "msg": "user not found"});
     
     } catch (err) {
         res.json({ "error": err.message });
@@ -16,30 +17,29 @@ async function readcatagory(req, res) {
 async function readspesific(req, res) {
     try {
         const obj = req.params.id;
-        const results = await catagorymodel.find({_id:obj}).sort({"_id": -1});
+        const results = await usersmodel.find({_id:obj}).sort({"_id": -1});
         if(results.length > 0)
             res.json({"data": results, "msg": "success"});
         else
-            res.json({"data": [], "msg": "catagory not found"});
+            res.json({"data": [], "msg": "user not found"});
     
     } catch (err) {
         res.json({ "error": err.message });
     }
 }
-
-async function addcatagory(req, res) {
+async function adduser(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"ctg_name": obj.ctg_name});
-            // const opts = { runValidators: true };
+            const resultsArr = await usersmodel.find({"p_name": obj.username});
+            // const opts = {runValidators : true};
     
             if(resultsArr.length > 0)
-                res.json({"msg":"catagory already Exists!"});
+                res.json({"msg":"user already Exists!"});
             else {
-                const insertcatagory = new catagorymodel(obj);
-                await insertcatagory.save();
-                res.json({"msg":"catagory added successfully!"});
+                const insertproduct = new usersmodel(obj);
+                await insertproduct.save();
+                res.json({"msg":"user added successfully!"});
             }
         } else
             res.json({"msg":"No Data to add"});
@@ -48,19 +48,20 @@ async function addcatagory(req, res) {
     }
 }
 
-async function deletecatagory(req, res) {
+async function deleteuser(req, res) {
     try {
         const obj = req.params.id;
+        console.log(obj);
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"_id": obj});
+            const resultsArr = await usersmodel.find({"_id": obj});
     
             if(resultsArr.length > 0) {
-                const results = await catagorymodel.deleteOne({"_id" :obj});
+                const results = await usersmodel.deleteOne({"_id":obj});
                 console.log(results);
                 if(results.deletedCount !== "")
-                    res.json({"msg":"catagory has been deleted successfully!"});
+                    res.json({"msg":"user has been deleted successfully!"});
                 else
-                    res.json({"msg":"Unable to delete catagory"});
+                    res.json({"msg":"Unable to delete user"});
             } else {
                 res.json({"msg":"No Data to Delete"});   
             }
@@ -71,21 +72,23 @@ async function deletecatagory(req, res) {
     }
 }
 
-async function updatecatagory(req, res) {
+async function updateuser(req, res) {
     try {
         const obj = req.body;
+        console.log(obj);
+        console.log(obj.id);
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"_id": obj._id});
+            const resultsArr = await usersmodel.find({"_id": obj._id});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
 
-                const results = await catagorymodel.updateOne({"_id": obj._id}, {$set: obj}, opts);
+                const results = await usersmodel.updateOne({"_id": obj._id}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
-                    res.json({"msg":"catagory has been updated successfully!"});
+                    res.json({"msg":"user has been updated successfully!"});
                 else
-                    res.json({"msg":"Unable to update catagory"});
+                    res.json({"msg":"Unable to update user"});
             } else {
                 res.json({"msg":"No Data to Update"});   
             }
@@ -96,4 +99,4 @@ async function updatecatagory(req, res) {
     }
 }
 
-module.exports ={readcatagory,readspesific,addcatagory,updatecatagory,deletecatagory};
+module.exports ={readusers,readspesific,adduser,updateuser,deleteuser};
