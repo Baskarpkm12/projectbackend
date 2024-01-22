@@ -48,9 +48,9 @@ async function addvendor(req, res) {
 
 async function deletevendor(req, res) {
     try {
-        const obj = req.body;
+        const obj = req.params.id;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await vendormodel.find({"vendor_name": obj.vendor_name});
+            const resultsArr = await vendormodel.find({"_id": obj.id});
     
             if(resultsArr.length > 0) {
                 const results = await vendormodel.deleteOne(obj);
@@ -73,12 +73,12 @@ async function updatevendor(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await vendormodel.find({"vendor_name": obj.vendor_name});
+            const resultsArr = await vendormodel.find({"_id": obj.id});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
 
-                const results = await vendormodel.updateOne({"vendor_name": obj.vendor_name}, {$set: obj}, opts);
+                const results = await vendormodel.updateOne({"_id": obj.id}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"vendor has been updated successfully!"});

@@ -50,9 +50,9 @@ async function addcatagory(req, res) {
 
 async function deletecatagory(req, res) {
     try {
-        const obj = req.body;
+        const obj = req.params.id;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"ctg_name": obj.ctg_name});
+            const resultsArr = await catagorymodel.find({"_id": obj.id});
     
             if(resultsArr.length > 0) {
                 const results = await catagorymodel.deleteOne(obj);
@@ -75,12 +75,12 @@ async function updatecatagory(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"ctg_name": obj.ctg_name});
+            const resultsArr = await catagorymodel.find({"_id": obj.id});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
 
-                const results = await catagorymodel.updateOne({"ctg_name": obj.ctg_name}, {$set: obj}, opts);
+                const results = await catagorymodel.updateOne({"_id": obj.id}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"catagory has been updated successfully!"});
