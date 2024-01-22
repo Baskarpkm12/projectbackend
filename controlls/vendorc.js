@@ -50,7 +50,7 @@ async function deletevendor(req, res) {
     try {
         const obj = req.params.id;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await vendormodel.find({"_id": obj.id});
+            const resultsArr = await vendormodel.find({"_id": obj});
     
             if(resultsArr.length > 0) {
                 const results = await vendormodel.deleteOne(obj);

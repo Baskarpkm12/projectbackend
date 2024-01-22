@@ -52,7 +52,7 @@ async function deletecatagory(req, res) {
     try {
         const obj = req.params.id;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await catagorymodel.find({"_id": obj.id});
+            const resultsArr = await catagorymodel.find({"_id": obj});
     
             if(resultsArr.length > 0) {
                 const results = await catagorymodel.deleteOne(obj);

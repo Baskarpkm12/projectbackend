@@ -75,6 +75,8 @@ async function deleteproduct(req, res) {
 async function updateproduct(req, res) {
     try {
         const obj = req.body;
+        console.log(obj);
+        console.log(obj.id);
         if(JSON.stringify(obj) !== "{}") {
             const resultsArr = await productsmodel.find({"_id": obj.id});
     
