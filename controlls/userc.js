@@ -27,11 +27,24 @@ async function readspesific(req, res) {
         res.json({ "error": err.message });
     }
 }
+async function login(req, res) {
+    try {
+        const obj = req.params.username;
+        const results = await usersmodel.find({username:obj}).sort({"_id": -1});
+        if(results.length > 0)
+            res.json({"data": results, "msg": "user already existied!"});
+        else
+            res.json({"data": [], "msg": "user not found"});
+    
+    } catch (err) {
+        res.json({ "error": err.message });
+    }
+}
 async function adduser(req, res) {
     try {
         const obj = req.body;
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await usersmodel.find({"p_name": obj.username});
+            const resultsArr = await usersmodel.find({"username": obj.username});
             // const opts = {runValidators : true};
     
             if(resultsArr.length > 0)
@@ -99,4 +112,4 @@ async function updateuser(req, res) {
     }
 }
 
-module.exports ={readusers,readspesific,adduser,updateuser,deleteuser};
+module.exports ={readusers,readspesific,login,adduser,updateuser,deleteuser};
