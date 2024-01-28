@@ -96,7 +96,7 @@ async function updateuser(req, res) {
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
                 
-                const results = await usersmodel.updateOne({"username": obj._username}, {$set: obj}, opts);
+                const results = await usersmodel.updateOne({"username": obj.username}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"user has been updated successfully!"});
