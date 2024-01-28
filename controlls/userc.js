@@ -89,14 +89,14 @@ async function updateuser(req, res) {
     try {
         const obj = req.body;
         console.log(obj);
-        console.log(obj.id);
+        console.log(obj.username);
         if(JSON.stringify(obj) !== "{}") {
-            const resultsArr = await usersmodel.find({"_id": obj._id});
+            const resultsArr = await usersmodel.find({"username": obj.username});
     
             if(resultsArr.length > 0) {
                 const opts = { runValidators: true };
-
-                const results = await usersmodel.updateOne({"_id": obj._id}, {$set: obj}, opts);
+                
+                const results = await usersmodel.updateOne({"username": obj._username}, {$set: obj}, opts);
                 console.log(results);
                 if(results.modifiedCount !== "")
                     res.json({"msg":"user has been updated successfully!"});
