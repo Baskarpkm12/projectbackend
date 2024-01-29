@@ -13,9 +13,10 @@ const usersschema = new schema({
     password : {
         type : String,
         required : [true,"please enetr password"]
+    },
+    cart : {
+        type : Array
     }
-    
-
 })
 
 const usersmodel = mongoose.model('users',usersschema);
