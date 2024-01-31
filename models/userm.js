@@ -15,7 +15,7 @@ const usersschema = new schema({
         required : [true,"please enetr password"]
     },
     cart : {
-        type : Object
+        type : Array
     }
 })
 
