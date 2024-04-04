@@ -29,7 +29,9 @@ async function readspesific(req, res) {
 }
 async function addproduct(req, res) {
     try {
-        const obj = req.body;
+        let obj = req.body;
+        const photo = req.protocol + '://' + req.get('host') + "/uploads/" + req.file.filename;
+        obj.photo = photo;
         if(JSON.stringify(obj) !== "{}") {
             const resultsArr = await productsmodel.find({"p_name": obj.p_name});
             // const opts = {runValidators : true};

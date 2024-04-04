@@ -26,6 +26,9 @@ const productschema = new schema({
         type : String,
         required : [true,"please enetr location!"]
     },
+    photo: {
+        type: String,
+    },
     vendor_id : {
         type : String,
         required : [true,"eneter vendor_id!"]
