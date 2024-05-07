@@ -34,7 +34,6 @@ const vendorroute = require('./routes/vendorr');
 // const paymentroute = require('./routes/paymentr');
 const usersroute = require('./routes/usersr');
 
-
 app.use("/product",productsroute);
 app.use("/catagory",catagoryroute);
 app.use("/vendor",vendorroute);
