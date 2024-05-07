@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
+const multer = require('multer');
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -32,7 +33,7 @@ const vendorroute = require('./routes/vendorr');
 // const saleroute = require('./routes/saler');
 // const paymentroute = require('./routes/paymentr');
 const usersroute = require('./routes/usersr');
-const multer = require('multer');
+
 
 app.use("/product",productsroute);
 app.use("/catagory",catagoryroute);
