@@ -1,7 +1,7 @@
 const productcontroll =require('../controlls/productsc');
 const router = require('express').Router();
 const multer = require('multer');
-const DIR = "./uploads/";
+const DIR = "/tmp/";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
