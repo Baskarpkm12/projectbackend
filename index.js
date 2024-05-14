@@ -13,7 +13,7 @@ app.use(cors());
 
 var storage = multer.diskStorage({
     destination: function(req ,file ,cb){
-        cb(null, './tmp')
+        cb(null, '/tmp')
     },
     filename:function(req,file,cb){
         cb(null , file.originalname)
@@ -21,7 +21,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({storage: storage})
 app.use(express.static(__dirname+'/tmp'));
-app.use('./tmp',express.static('tmp'));
+app.use('/tmp',express.static('tmp'));
 
 
 // const path = require('path');
