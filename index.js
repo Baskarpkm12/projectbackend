@@ -7,7 +7,7 @@ const multer = require('multer');
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors({
-    origin:['http://127.0.0.1:5173', 'http://localhost:5173', ]
+    origin:['http://127.0.0.1:5173', 'http://localhost:5173',"https://baskar-e-com-admin.netlify.app","https://e-com-user.netlify.app" ]
 }));
 app.use(cors());
 
